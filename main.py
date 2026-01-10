@@ -9,7 +9,8 @@ ground = PhysicalObject(position = (0,-2,0), model = "cube", phyisics_type=Physi
 
 def input(key):
     if key == "j":
-        po.movement_vector[1] += 90
+
+        po.movement_vector[1] += 10
 
 #def update():
 #    po.position+=po.left*time.dt*3*held_keys["a"]

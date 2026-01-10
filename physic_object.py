@@ -9,7 +9,7 @@ class PhysicsType(Enum):
 
 class PhysicalObject(Entity):
     gravity = True
-    gravity_vector = Vec3(0,-9.81,0)
+    gravity_vector = Vec3(0,-9.8,0)
     #should I include a parameter for the terminal velocity to avoid clipping??
 
 
@@ -60,19 +60,28 @@ class PhysicalObject(Entity):
                 if tmp2 > 0:
                     self.movement_vector[self.getFallDirection()] = 0
 
+
+
+        secondary_ground_ray = raycast(self.position, PhysicalObject.gravity_vector.normalized(), ignore=(self,), 
+                                          distance=((self.scale[self.getFallDirection()]/2)+.2), debug=True)
+
         self.position[self.getFallDirection()] = self.ground_ray.world_point[self.getFallDirection()]+.1
         
+        self.avoid_clipping()
+
+    def avoid_clipping(self):
+        pass
 
     def fall(self):
         self.grounded = False
-        self.movement_vector += PhysicalObject.gravity_vector
+        self.movement_vector += PhysicalObject.gravity_vector*time.dt
 
     def update(self):
         if self.physics_type == PhysicsType.MOBILE:
             self.position += self.movement_vector*time.dt
             if PhysicalObject.gravity:
                 self.ground_ray = raycast(self.position, PhysicalObject.gravity_vector.normalized(), ignore=(self,), 
-                                          distance=((self.scale[self.getFallDirection()]/2)+1), debug=True)
+                                          distance=((self.scale[self.getFallDirection()]/2)+.2), debug=True)
 
                 if self.ground_ray.hit:
                     
