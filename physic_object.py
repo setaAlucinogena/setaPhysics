@@ -108,3 +108,9 @@ class PhysicalObject(Entity):
 
         elif self.physics_type == PhysicsType.INAMOBIBLE:
             pass
+
+
+#next thing is getting the math for applying forces n such. I dont know if I should make like an add_force(self, force,source_position) method
+#that calculates the new movement_vector from both the parameters and the mass of the object or go all-in in a hard colliders system so that when 
+#an object moves the other back of depending on its mass and friction and whatnot. Oh yeah and also friction. And also bounce. Bool for a bounce parameter
+#and if = True, I have to put some kind of bouncing constant. Bouncing will be just spinning the movement_vector around.

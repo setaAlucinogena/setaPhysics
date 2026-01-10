@@ -12,8 +12,8 @@ def input(key):
 
         po.movement_vector[1] += 10
 
-#def update():
-#    po.position+=po.left*time.dt*3*held_keys["a"]
+def update():
+    po.position+=po.left*time.dt*3*held_keys["a"]
 
 EditorCamera()
 app.run()
